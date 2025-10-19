@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control: Aerospace Study Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@400;700;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="section-bg-1">
+        <nav>
+            <div class="logo">
+                <a href="#">🌌 Subreath </a>
+            </div>
+            <ul>
+                <li><a href="#notes">Notes</a></li>
+                <li><a href="#questions">Missions</a></li>
+                <li><a href="#media">Study Media</a></li>
+                <li><a href="#visualization">Progress</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</h1>
+            <p>Initiating your trajectory to Aerospace greatness.</p>
+            <button class="cta-button" onclick="scrollToSection('notes')">Begin Launch Sequence</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-content-wrapper">
+            
+            <section id="notes" class="section-container">
+                <video class="section-video-bg" autoplay loop muted playsinline src="air-dominance_v2.mp4"></video>
+                <div class="content-overlay">
+                    <h2>REMINDER NOTES</h2>
+                    <p class="subtitle">Log your mission-critical reminders and insights.</p>
+                    <div class="note-input-area">
+                        <textarea id="note-input" placeholder="Enter reminder (e.g., Review Orbital Mechanics Chapter 3)"></textarea>
+                        <button onclick="addNote()">Add Log</button>
+                    </div>
+                    <div id="note-list" class="note-list">
+                        <div class="sample-note" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Initial Setup: Remember to define your weekly goals!</span>
+                            <button class="delete-btn" onclick="this.parentElement.remove()">❌ Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="questions" class="section-container">
+                <video class="section-video-bg" autoplay loop muted playsinline src="Leading_Launch_Service_Mobile_02email_c06f4154a8.mp4"></video>
+                <div class="content-overlay">
+                    <h2>MISSIONS: QUESTIONS TRACKER</h2>
+                    <p class="subtitle">Every solved problem is a successful stage separation.</p>
+                    <div class="question-tracker">
+                        <div class="to-solve">
+                            <h3>:: Launch Missions (To Do)</h3>
+                            <div class="question-input-area">
+                                <input type="text" id="topic-input" placeholder="Topic (e.g., Fluid Dynamics)">
+                                <input type="number" id="count-input" placeholder="Qs Count" min="1">
+                                <button onclick="addQuestion()">Add Mission</button>
+                            </div>
+                            <ul id="to-solve-list" class="to-solve-list">
+                                </ul>
+                        </div>
+                        <div class="solved">
+                            <h3>:: Solved Missions (Achieved)</h3>
+                            <ul id="solved-list">
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="media" class="section-container section-bg-2">
+                <div class="content-overlay">
+                    <h2>STUDY MEDIA HUB</h2>
+                    <p class="subtitle">Fuel your focus with music and relevant video content.</p>
+                    <div class="media-container">
+                        <div class="spotify-section">
+                            <h3>Spotify: Focus Music Player</h3>
+                            <div class="embed-placeholder spotify-embed">
+                                <iframe style="border-radius:12px" 
+                                    src="http://googleusercontent.com/spotify.com/5" 
+                                    width="100%" height="350" frameborder="0" 
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+                                </iframe>
+                                <p class="embed-note">Oynatıcıya tıklayın. Oturum açtıysanız müzik başlar, aksi takdirde oturum açma veya çalma isteği ekranda belirir.</p>
+                            </div>
+                        </div>
+                        <div class="youtube-section">
+                            <h3>YouTube: Study Content</h3>
+                            <div class="embed-placeholder youtube-embed">
+                                <iframe width="100%" height="400" 
+                                    src="https://www.youtube.com/embed/videoseries?list=PLg4s0q4-F_sBv2b-G0d7iFjF3v504R2hT" 
+                                    title="Aerospace Engineering Playlist" frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                                <p class="embed-note">İzlemeye başlamak için oynatıcıya tıklayın. Sol üstteki menüyü kullanarak oynatma listesi içindeki diğer videolara göz atın.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="visualization" class="section-container section-bg-3">
+                <div class="content-overlay">
+                    <h2>YOUR FLIGHT PATH TO SUCCESS</h2>
+                    <p class="subtitle">Visualize the trajectory of your hard work.</p>
+                    <div class="motivation-content">
+                        <div class="text-block">
+                            <h3>"Failure is not an option. It's a stepping stone."</h3>
+                            <p>This is where charts and graphs will display your weekly questions solved, subject focus areas, and study streaks. Keep climbing!</p>
+                        </div>
+                        <div class="gif-placeholder">
+                             <img src="F-35B-vertical-landing.gif" alt="F-35B vertical landing animation" style="width: 100%; height: auto; border-radius: 8px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+
+    <footer>
+        <p>Built with precision for a future Aerospace Engineer. Keep Reaching for the Stars!</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
