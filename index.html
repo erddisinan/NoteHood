@@ -6,6 +6,7 @@
     <title>Mission Control: Aerospace Study Hub</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@400;700;700&display=swap" rel="stylesheet">
+    <!-- Chart.js script removed as it's no longer needed -->
 </head>
 <body>
     <header class="section-bg-1">
@@ -16,6 +17,8 @@
             <ul>
                 <li><a href="#notes">Notes</a></li>
                 <li><a href="#questions">Missions</a></li>
+                <li><a href="#image-bank">Image Bank</a></li>
+                <li><a href="#yks-tracker">YKS Tracker</a></li>
                 <li><a href="#media">Study Media</a></li>
                 <li><a href="#visualization">Progress</a></li>
             </ul>
@@ -23,7 +26,7 @@
         <div class="hero">
             <h1>"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</h1>
             <p>Initiating your trajectory to Aerospace greatness.</p>
-            <button class="cta-button" onclick="scrollToSection('notes')">Begin Launch Sequence</button>
+            <button class="cta-button" id="launch-btn">Begin Launch Sequence</button>
         </div>
     </header>
 
@@ -37,13 +40,10 @@
                     <p class="subtitle">Log your mission-critical reminders and insights.</p>
                     <div class="note-input-area">
                         <textarea id="note-input" placeholder="Enter reminder (e.g., Review Orbital Mechanics Chapter 3)"></textarea>
-                        <button onclick="addNote()">Add Log</button>
+                        <button id="add-note-btn">Add Log</button>
                     </div>
                     <div id="note-list" class="note-list">
-                        <div class="sample-note" style="display: flex; justify-content: space-between; align-items: center;">
-                            <span>Initial Setup: Remember to define your weekly goals!</span>
-                            <button class="delete-btn" onclick="this.parentElement.remove()">❌ Delete</button>
-                        </div>
+                        <!-- Loaded from JS -->
                     </div>
                 </div>
             </section>
@@ -59,20 +59,133 @@
                             <div class="question-input-area">
                                 <input type="text" id="topic-input" placeholder="Topic (e.g., Fluid Dynamics)">
                                 <input type="number" id="count-input" placeholder="Qs Count" min="1">
-                                <button onclick="addQuestion()">Add Mission</button>
+                                <button id="add-mission-btn">Add Mission</button>
                             </div>
                             <ul id="to-solve-list" class="to-solve-list">
-                                </ul>
+                                <!-- Loaded from JS -->
+                            </ul>
                         </div>
                         <div class="solved">
                             <h3>:: Solved Missions (Achieved)</h3>
                             <ul id="solved-list">
-                                </ul>
+                                <!-- Loaded from JS -->
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <section id="image-bank" class="section-container section-bg-4">
+                <div class="content-overlay">
+                    <h2>MISSION IMAGE BANK</h2>
+                    <p class="subtitle">Upload key questions or diagrams to revisit (Max 10).</p>
+                    <div id="image-upload-grid" class="image-upload-grid">
+                        
+                        <!-- Total 10 Slots -->
+                        <div class="image-slot" data-slot-id="1"><label class="image-upload-label" for="image-input-1"><span>+</span><p>Slot 1</p></label><input type="file" class="image-input" id="image-input-1" accept="image/*"><img class="image-preview" src="" alt="Preview 1"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="2"><label class="image-upload-label" for="image-input-2"><span>+</span><p>Slot 2</p></label><input type="file" class="image-input" id="image-input-2" accept="image/*"><img class="image-preview" src="" alt="Preview 2"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="3"><label class="image-upload-label" for="image-input-3"><span>+</span><p>Slot 3</p></label><input type="file" class="image-input" id="image-input-3" accept="image/*"><img class="image-preview" src="" alt="Preview 3"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="4"><label class="image-upload-label" for="image-input-4"><span>+</span><p>Slot 4</p></label><input type="file" class="image-input" id="image-input-4" accept="image/*"><img class="image-preview" src="" alt="Preview 4"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="5"><label class="image-upload-label" for="image-input-5"><span>+</span><p>Slot 5</p></label><input type="file" class="image-input" id="image-input-5" accept="image/*"><img class="image-preview" src="" alt="Preview 5"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="6"><label class="image-upload-label" for="image-input-6"><span>+</span><p>Slot 6</p></label><input type="file" class="image-input" id="image-input-6" accept="image/*"><img class="image-preview" src="" alt="Preview 6"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="7"><label class="image-upload-label" for="image-input-7"><span>+</span><p>Slot 7</p></label><input type="file" class="image-input" id="image-input-7" accept="image/*"><img class="image-preview" src="" alt="Preview 7"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="8"><label class="image-upload-label" for="image-input-8"><span>+</span><p>Slot 8</p></label><input type="file" class="image-input" id="image-input-8" accept="image/*"><img class="image-preview" src="" alt="Preview 8"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="9"><label class="image-upload-label" for="image-input-9"><span>+</span><p>Slot 9</p></label><input type="file" class="image-input" id="image-input-9" accept="image/*"><img class="image-preview" src="" alt="Preview 9"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+                        <div class="image-slot" data-slot-id="10"><label class="image-upload-label" for="image-input-10"><span>+</span><p>Slot 10</p></label><input type="file" class="image-input" id="image-input-10" accept="image/*"><img class="image-preview" src="" alt="Preview 10"><div class="image-controls"><button class="fav-btn" title="Favorite">☆</button><button class="delete-image-btn" title="Delete">❌</button></div></div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="favorites" class="section-container section-bg-5">
+                <div class="content-overlay">
+                    <h2>FAVORITE MISSIONS</h2>
+                    <p class="subtitle">Your starred questions for quick review.</p>
+                    <div id="favorite-list" class="favorite-grid">
+                        <!-- Favorite items will be dynamically added here by JS -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- =================================== -->
+            <!-- == YKS TRACKER (SIMPLIFIED) == -->
+            <!-- =================================== -->
+            <section id="yks-tracker" class="section-container section-bg-4">
+                <div class="content-overlay">
+                    <h2>YKS EXAM CALCULATOR</h2>
+                    <p class="subtitle">Calculate your raw score for TYT and AYT.</p>
+                    
+                    <div id="yks-calculator">
+                        <fieldset>
+                            <legend>TYT (Temel Yeterlilik Testi)</legend>
+                            <div class="input-group">
+                                <label>Turkish (40)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="tyt-tur-c" placeholder="C"><input type="number" id="tyt-tur-i" placeholder="I"><input type="number" id="tyt-tur-b" placeholder="B">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Social (20)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="tyt-soc-c" placeholder="C"><input type="number" id="tyt-soc-i" placeholder="I"><input type="number" id="tyt-soc-b" placeholder="B">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Math (40)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="tyt-mat-c" placeholder="C"><input type="number" id="tyt-mat-i" placeholder="I"><input type="number" id="tyt-mat-b" placeholder="B">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Science (20)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="tyt-sci-c" placeholder="C"><input type="number" id="tyt-sci-i" placeholder="I"><input type="number" id="tyt-sci-b" placeholder="B">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>AYT (Alan Yeterlilik Testi - Sayısal)</legend>
+                            <div class="input-group">
+                                <label>Math (40)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="ayt-mat-c" placeholder="C"><input type="number" id="ayt-mat-i" placeholder="I"><input type="number" id="ayt-mat-b" placeholder="B">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Physics (14)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="ayt-phy-c" placeholder="C"><input type="number" id="ayt-phy-i" placeholder="I"><input type="number" id="ayt-phy-b" placeholder="B">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Chemistry (13)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="ayt-che-c" placeholder="C"><input type="number" id="ayt-che-i" placeholder="I"><input type="number" id="ayt-che-b" placeholder="B">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Biology (13)</label>
+                                <div class="input-fields">
+                                    <input type="number" id="ayt-bio-c" placeholder="C"><input type="number" id="ayt-bio-i" placeholder="I"><input type="number" id="ayt-bio-b" placeholder="B">
+                                </div>
+                            </div>
+                        </fieldset>
+                        
+                        <div id="yks-results-display">
+                            <div>TYT Total Net: <span id="tyt-total-net-display">0.00</span></div>
+                            <div>AYT Total Net: <span id="ayt-total-net-display">0.00</span></div>
+                            <div>Total Raw Score: <span id="total-raw-score-display">0.00</span></div>
+                        </div>
+                        
+                        <div class="yks-controls">
+                            <button id="calculate-score-btn" class="cta-button">Calculate</button>
+                        </div>
+                        <p class="embed-note">Note: Score is a 'Raw Score' (Ham Puan) based on your provided coefficients. It does not include OBP or Standard Deviation.</p>
+                    </div>
+                </div>
+            </section>
+
+            
             <section id="media" class="section-container section-bg-2">
                 <div class="content-overlay">
                     <h2>STUDY MEDIA HUB</h2>
