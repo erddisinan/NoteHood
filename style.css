@@ -79,12 +79,29 @@ a:hover {
     opacity: 0.2; 
 }
 
-/* Static Image Background Styling */
-header, .section-bg-2, .section-bg-3 {
+
+/* --- PERMANENT GLITCH FIX --- */
+
+/* Parallax effect ONLY for the header */
+header {
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Parallax effect */
+    background-attachment: fixed; 
 }
+
+/* Normal scroll for ALL other sections to prevent glitches */
+.section-bg-2, .section-bg-3 {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; 
+}
+
+/* Remove problematic GIF backgrounds and replace with solid color */
+.section-bg-4, .section-bg-5 {
+    background-color: var(--background-medium);
+}
+/* ----------------- */
+
 
 header {
     background-image: url('pexels-spacex-23764.jpg'); 
@@ -93,12 +110,10 @@ header {
 
 .section-bg-2 {
     background-image: url('F-35B-vertical-landing.gif'); 
-    opacity: 0.4;
 }
 
 .section-bg-3 {
     background-image: url('aerospace_engineer.jpg'); 
-    opacity: 0.4;
 }
 
 
@@ -108,13 +123,12 @@ header {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 40px;
-    /* --- CRITICAL CHANGE: Maksimum Şeffaflık (0.35) --- */
-    background-color: rgba(15, 15, 27, 0.35); 
+    background-color: rgba(15, 15, 27, 0.6); 
     border-radius: 8px;
     padding: 40px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
     text-align: center;
-    backdrop-filter: blur(5px); /* Hafif blur efekti ekler */
+    backdrop-filter: blur(5px);
 }
 
 /* --- HEADER & NAVIGATION --- */
@@ -125,7 +139,6 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    /* Navigasyonu hala okunur tutar (daha az şeffaflık) */
     background-color: rgba(15, 15, 27, 0.7); 
     position: fixed;
     top: 0;
@@ -145,6 +158,8 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center;
 }
 
 nav ul li a {
@@ -195,6 +210,7 @@ nav ul li a:hover {
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 5px;
 }
 
 .cta-button:hover {
@@ -216,13 +232,32 @@ nav ul li a:hover {
     padding: 15px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    /* Yarı saydam arka plan */
     background-color: rgba(29, 29, 43, 0.5); 
     color: var(--secondary-color);
     font-size: 1em;
     min-height: 60px;
     resize: vertical;
 }
+
+.note-input-area button,
+.question-input-area button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+.note-input-area button:hover,
+.question-input-area button:hover {
+    background-color: var(--accent-glow);
+    color: var(--background-dark);
+}
+
 
 .note-list {
     display: grid;
@@ -231,19 +266,22 @@ nav ul li a:hover {
 }
 
 .sample-note {
-    /* Yarı saydam arka plan */
     background-color: rgba(29, 29, 43, 0.5); 
     padding: 12px 15px;
     border-radius: 5px;
     border-left: 3px solid var(--primary-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     transition: transform 0.2s ease;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
 }
 
 .sample-note span {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1em;
     font-weight: 400;
+    word-break: break-word;
 }
 
 /* --- QUESTIONS/MISSIONS SECTION --- */
@@ -262,6 +300,7 @@ nav ul li a:hover {
 
 .question-input-area {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -270,9 +309,15 @@ nav ul li a:hover {
     padding: 8px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    /* Yarı saydam arka plan */
     background-color: rgba(29, 29, 43, 0.5);
     color: var(--secondary-color);
+}
+.question-input-area input[type="text"] {
+    flex-grow: 1;
+    min-width: 150px;
+}
+.question-input-area input[type="number"] {
+    width: 80px;
 }
 
 .question-tracker ul {
@@ -281,7 +326,6 @@ nav ul li a:hover {
 }
 
 .question-tracker ul li {
-    /* Yarı saydam arka plan */
     background-color: rgba(29, 29, 43, 0.5); 
     padding: 10px 15px;
     margin-bottom: 8px;
@@ -290,7 +334,16 @@ nav ul li a:hover {
     align-items: center;
     justify-content: space-between;
     font-size: 1.05em;
+    word-break: break-word;
 }
+.question-tracker ul li[data-topic] {
+    border-left: 4px solid var(--warning-color);
+}
+.solved ul li[data-topic] {
+    border-left-color: var(--success-color);
+    text-decoration: line-through;
+}
+
 
 .checkbox {
     margin-right: 10px;
@@ -298,10 +351,194 @@ nav ul li a:hover {
     cursor: pointer;
 }
 
-/* Action Buttons */
 .solve-btn { color: var(--success-color); border: none; background: none; cursor: pointer; font-weight: 700; }
 .delete-btn { color: var(--delete-color); border: none; background: none; cursor: pointer; font-weight: 700; margin-left: 10px; }
 .undo-btn { color: var(--delete-color); border: none; background: none; cursor: pointer; font-weight: 700; margin-left: 10px; }
+
+
+/* --- IMAGE & FAVORITES SECTION STYLES --- */
+
+.image-upload-grid, .favorite-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+@media (min-width: 900px) {
+    .image-upload-grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 columns on desktop */
+    }
+}
+
+
+.image-slot {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(29, 29, 43, 0.5);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.image-slot:hover {
+    border-color: var(--accent-glow);
+}
+
+.image-upload-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    color: var(--border-color);
+}
+.image-upload-label span {
+    font-size: 3em;
+    font-weight: 100;
+}
+.image-upload-label p {
+    font-size: 1em;
+    margin: 0;
+}
+
+.image-input {
+    display: none;
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.image-controls {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: none;
+    gap: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.fav-btn, .delete-image-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s ease;
+}
+.fav-btn:hover, .delete-image-btn:hover {
+    transform: scale(1.2);
+}
+.fav-btn.favorited {
+    color: #ffd700;
+}
+
+.image-slot.has-image .image-upload-label { display: none; }
+.image-slot.has-image .image-preview { display: block; }
+.image-slot.has-image .image-controls { display: flex; }
+.image-slot.has-image { border-style: solid; }
+
+.favorite-grid {
+    min-height: 150px;
+}
+
+.favorite-item {
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--accent-glow);
+}
+.favorite-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- YKS TRACKER STYLES (SIMPLIFIED) --- */
+
+#yks-calculator {
+    max-width: 600px; /* Limit width of calculator */
+    margin: 0 auto; /* Center it */
+    text-align: left;
+}
+
+#yks-calculator fieldset {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: rgba(29, 29, 43, 0.3);
+}
+
+#yks-calculator legend {
+    color: var(--primary-color);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 0 10px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.input-group label {
+    font-size: 1.1em;
+    flex-shrink: 0;
+}
+
+.input-fields {
+    display: flex;
+    gap: 5px;
+}
+
+.input-group input[type="number"] {
+    width: 50px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(29, 29, 43, 0.7);
+    color: var(--secondary-color);
+    text-align: center;
+    -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#yks-results-display {
+    background-color: rgba(29, 29, 43, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+}
+
+#yks-results-display div { margin-bottom: 10px; }
+#yks-results-display span {
+    color: var(--accent-glow);
+    font-weight: 700;
+    float: right;
+}
+
+.yks-controls {
+    display: flex;
+    justify-content: center; /* Center the single button */
+    margin: 20px 0;
+}
 
 /* --- MEDIA HUB SECTION --- */
 .media-container {
@@ -332,6 +569,7 @@ nav ul li a:hover {
     color: var(--border-color);
     margin-top: 10px;
     font-style: normal;
+    text-align: center; /* Center the note */
 }
 
 /* --- VISUALIZATION/MOTIVATION --- */
@@ -342,20 +580,13 @@ nav ul li a:hover {
     text-align: left;
 }
 
-.motivation-content .text-block {
-    flex: 1;
-}
-
-.gif-placeholder {
-    flex: 1;
-    min-width: 300px;
-}
+.motivation-content .text-block { flex: 1; }
+.gif-placeholder { flex: 1; min-width: 300px; }
 
 /* --- FOOTER --- */
 footer {
     text-align: center;
     padding: 30px 20px;
-    /* Yarı saydam arka plan */
     background-color: rgba(29, 29, 43, 0.7); 
     color: var(--border-color);
     font-size: 0.9em;
@@ -377,23 +608,10 @@ footer {
     0%, 100% { opacity: 0; transform: scale(0.5); }
     50% { opacity: 1; transform: scale(1); }
 }
-/* --- Other Animations --- */
 
-@keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 204, 255, 0.7); }
-    100% { transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 204, 255, 0.7); }
-}
-
-/* --- RESPONSIVENESS (for a professional look on mobile) --- */
+/* --- RESPONSIVENESS --- */
 @media (max-width: 900px) {
-    .content-overlay {
-        padding: 30px 20px;
-    }
+    .content-overlay { padding: 30px 20px; }
     .question-tracker, .media-container, .motivation-content {
         grid-template-columns: 1fr;
         flex-direction: column;
@@ -404,20 +622,32 @@ footer {
         flex-direction: column;
         padding: 10px 20px;
     }
-    nav ul {
-        margin-top: 10px;
+    nav ul { margin-top: 10px; }
+    .hero { min-height: 50vh; padding-top: 20px; }
+    .hero h1 { font-size: 2em; }
+    .note-input-area { flex-direction: column; }
+    .embed-placeholder iframe { height: 250px; }
+    .image-upload-grid, .favorite-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
-    .hero {
-        min-height: 50vh;
-        padding-top: 20px;
-    }
-    .hero h1 {
-        font-size: 2em;
-    }
-    .note-input-area {
+}
+
+@media (max-width: 480px) {
+    nav ul { gap: 0; }
+    nav ul li a { padding: 5px 8px; }
+    
+    .input-group {
         flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
     }
-    .embed-placeholder iframe {
-        height: 250px;
+    .input-group label { text-align: left; }
+    .input-fields {
+        display: flex;
+        gap: 5px;
+    }
+    .input-group input[type="number"] {
+        flex: 1 1 0; /* Make C/I/B inputs share space */
+        width: 33.3%;
     }
 }
